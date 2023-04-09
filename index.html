@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    header {
+      padding: 0;
+    }
+  </style>
+  <title>hAIku</title>
+</head>
+
+<body>
+  <main style="padding-top:0">
+    <header>
+      <h1>hAIku - an LLM party game</h1>
+      <img src=" /hero.jpg">
+    </header>
+    <section>
+      <aside>
+        <h2>Haiku</h2>
+        <div id="haiku">
+          Decide on a theme<br>
+          then click "Generate" to play<br>
+          (check the settings first)
+        </div>
+      </aside>
+      <aside>
+        <details>
+          <summary>Settings</summary>
+          <details>
+            <summary>
+              OpenAI API Key
+            </summary>
+            <input type="password" id="openai-key" name="openai-key" />
+          </details>
+          <details>
+            <summary>
+              Game Options
+            </summary>
+            <table style="width:100%;border:none">
+              <tr>
+                <td>
+                  <label for="mode">Mode</label>
+                  <select id="mode" name="mode">
+                    <option value="loose">loose</option>
+                    <option value="strict" selected>strict</option>
+                    <option value="traditional">traditional</option>
+                  </select>
+                </td>
+                <td>
+                  <label for="model">Model</label>
+                  <select id="model" name="model">
+                    <option value="gpt-3.5-turbo" selected>3.5</option>
+                    <option value="gpt-4">4</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </details>
+        </details>
+        <label for="theme">Theme</label>
+        <textarea id="theme" name="theme" rows="4" cols="50"
+          placeholder="the loss of self experienced during moments of extreme trauma"></textarea>
+        <button id="generate">Generate</button>
+      </aside>
+    </section>
+    <article>
+      <header>
+        <h2>Instructions</h2>
+        <h3> Requirements</h3>
+      </header>
+      <section>
+        <ul>
+          <li>At least 3 players</li>
+          <li>A computer or phone with an internet connection</li>
+          <li><a href="https://platform.openai.com/account/api-keys">An OpenAI API Key</a>†</li>
+          <li>A pencil and slips of paper for each player</li>
+          <li>A sheet of paper to keep score</li>
+        </ul>
+      </section>
+      <header>
+        <h3>Setup</h3>
+      </header>
+      <section>
+        <ol>
+          <li> Click "Settings" and enter your OpenAI API key.</li>
+          <li> Choose the model (note that GPT-4 is currently locked behind a wait list)</li>
+          <li> Choose the "mode". There are three modes:
+            <ul>
+              <li>"loose" - haiku can be loosely written, don't need to fit
+                exact syllables, but should be "short/long/short" in terms of
+                lines. This is a good mode if your players are not very
+                experienced with writing strict haiku.</li>
+              <li>"strict" - haiku should be strictly 5/7/5 syllables. They do
+                not need to fit the traditional Japanese concept of a haiku</li>
+              <li>"traditional" - haiku should sound like they were translated
+                from a traditional Japanese haiku. These haiku will almost never
+                fit the 5/7/5 syllable count in English, but they will fit
+                "short/long/short". In this mode, haiku should include a "kigo",
+                or seasonal reference like "melting snow" or which can be more abstract
+                like "frog" for spring. "Kireji" don't need to be included,
+                because they don't usually translate into English anyway (if you
+                don't know what that means, don't worry about it).
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+      <header>
+        <h3>How to play</h3>
+      </header>
+      <section>
+        <ul>
+          <li>On each turn, one player will play the "AI Controller", and the
+            others will play the "Poets".</li>
+          <li>The AI Controller selects a theme. Good themes are abstract and
+            open to interpretation and metaphor.
+          <li>
+            After typing in the theme and reading it to the players, the AI
+            Controller clicks "Generate"
+          </li>
+          <li>
+            Each Poet writes their name on a slip of paper, and then a haiku to
+            match the theme chosen. They fold the slip up and hand it to the AI Controller
+          </li>
+          <li>
+            The AI controller writes down the AI generated haiku on a slip of
+            paper, and "AI" instead of the name.
+          </li>
+          <li>
+            Once all the slips are collected, the AI Controller numbers all of
+            the haiku from 1-N, where N is the number of players. They read the
+            haiku out, and each player writes down the number of the haiku they
+            like most ("high quality"), as well as the haiku they think was
+            written by the AI ("fake"). Players may not vote for their own
+            haiku.
+          </li>
+          <li>
+            The votes are tallied, and scoring is as follows:
+            <ul>
+              <li>1 point to each player who rated the AI haiku as "fake"</li>
+              <li>1 point to each player for every "high quality" vote they receive</li>
+              <li>
+                1 point to the AI controller for every "high quality" vote the
+                AI generated haiku receives
+              </li>
+              <li>
+                2 points to the AI controller if nobody identifies the AI generated haiku
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Notes:</h3>
+        † This game runs entirely in browser and with the OpenAI API. Your API
+        key is never sent anywhere except for OpenAI, and it is only used when
+        you click "Generate". As a best practice, it's a good idea to always
+        create a new key for any app you're using, including this one, so that
+        you can revoke it if it gets exposed.
+      </section>
+    </article>
+    <script type="module" src="/src/main.ts"></script>
+  </main>
+</body>
+
+</html>
